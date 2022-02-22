@@ -1,0 +1,24 @@
+.personal{
+    display: flex;
+    flex-direction: column;
+    justify-content:center;
+    margin-top:55px;
+    background-color: white;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    width: 50%;
+    height: 70vh;
+    border-radius:20px;
+    padding:50px;
+    align-items: center;
+    text-align: center;
+}
+.flexCenter{
+    display:flex;
+    justify-content: center;
+}
+.nameSurname{
+    width: 100%;
+}
+.ageCount{
+    margin-top: 30px;
+}
