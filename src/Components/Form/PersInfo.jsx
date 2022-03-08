@@ -34,14 +34,16 @@ function PersInfo(){
     const[data, setData] = useState({
         name:"",
         surname:"",
+        salary: "",
         age:"",
         email:"",
         phoneNumber:"",
         birthYear:"",
         city:"",
         note:"",
+        save: false,
     })
-    const [age,setAge] = useState([
+    const [age] = useState([
             {value:"18"},
             {value:"19"},
             {value:"20"},
@@ -53,7 +55,7 @@ function PersInfo(){
             {value:"26"},
             {value:"27"},
     ])
-    const [city,setCity]=useState([
+    const [city]=useState([
         {city:"Sivas"},
         {city:"Istanbul"},
         {city:"Izmir"},
@@ -75,6 +77,12 @@ function PersInfo(){
             surname : event.target.value
         })
         console.log(data.surname);
+    }
+    const salaryData = (event) =>{
+        setData({
+            ...data,
+            salary : event.target.value
+        })
     }
     const ageData = (event) =>{
         setData({
@@ -112,6 +120,15 @@ function PersInfo(){
             note: event.target.value
         })
     }
+
+
+
+    const onSave = (event) =>{
+        setData({
+            ...data,
+            save:true
+        })
+    }
     return(
         <div className="personal">
             <Typography color="primary" className={classes.title} variant="h5">Application Form</Typography>
@@ -120,6 +137,7 @@ function PersInfo(){
                 <TextField
                 onChange={nameData}
                 className={classes.leftBox}
+                error={data.save ? data.name==="" : ""}
                 id="outlined-error-helper-text"
                 label="Name"
                 variant="outlined"
@@ -127,6 +145,7 @@ function PersInfo(){
                 />
                 <TextField
                 onChange={surnameData}
+                error={data.save ? data.surname==="" : ""}
                 className={classes.rightBox}
                 label="Surname"
                 variant="outlined"
@@ -141,6 +160,7 @@ function PersInfo(){
 
                 <TextField
                 className={classes.leftBox}
+                error={data.save ? data.email === "" : ""}
                 id="outlined-currency"
                 label="EMail"
                 variant='outlined'
@@ -152,6 +172,7 @@ function PersInfo(){
 
                 <TextField
                 className={classes.rightBox}
+                error={data.save ? data.phoneNumber === "" : ""}
                 id="outlined-currency"
                 label="Phone Number"
                 variant='outlined'
@@ -166,7 +187,9 @@ function PersInfo(){
             <div className="ageCount flexCenter">
             <FormControl variant="outlined">
                 <OutlinedInput
+                    error={data.save ? data.salary === "" : ""}
                     id="outlined-adornment-weight"
+                    onChange={salaryData}
                     className={classes.leftBox}
                     startAdornment={<InputAdornment position="end">$</InputAdornment>}
                     aria-describedby="outlined-weight-helper-text"
@@ -177,6 +200,7 @@ function PersInfo(){
                 <FormHelperText id="outlined-weight-helper-text">Salary Expectation</FormHelperText>
             </FormControl>
                 <TextField
+                error={data.save ? data.birthYear === "" : ""}
                 className={classes.rightBox}
                 type="date"
                 id="outlined-select-currency"
@@ -186,6 +210,7 @@ function PersInfo(){
             </div>
             <div className="ageCount flexCenter">
             <TextField
+                error={data.save ? data.age === "" : ""}
                 className={classes.leftBox}
                 id="outlined-currency"
                 select
@@ -200,6 +225,7 @@ function PersInfo(){
                 ))}
                 </TextField>
                 <TextField
+                error={data.save ? data.city==="" : ""}
                 className={classes.rightBox}
                 id="outlined-select-currency"
                 select
@@ -217,6 +243,7 @@ function PersInfo(){
             </div>
             <div className="note">
             <TextField
+                error={data.save ? data.note === "" : ""}
                 className={classes.fullWidth}
                 id="outlined-select-currency"
                 label="Notes"
@@ -226,7 +253,7 @@ function PersInfo(){
                 helperText="drop us a note"
                 />
             </div>
-            <Button className={classes.button} variant="contained" color="primary">Send</Button>
+            <Button className={classes.button} onClick={onSave} variant="contained" color="primary">Send</Button>
 
         </div>
     )
